@@ -1,0 +1,36 @@
+<header
+  class="mx-auto w-screen max-w-screen-2xl px-6 sm:px-7 xl:px-8 2xl:px-10 py-6"
+>
+  <nav class="flex items-center justify-between flex-wrap">
+    <!-- this renders the site title from config.toml, line 4: title = "Hugo Tailwindcss Starter" ||  "Hugo Tailwind Skeleton" -->
+    <a href="{{ .Site.Home.Permalink }}"> {{ .Site.Title }} </a>
+    <!-- this renders the site title from config.toml, line 4: title = "Hugo Tailwindcss Starter" ||  "Hugo Tailwind Skeleton" -->
+
+    <!-- this gets the page with the path /about  -->
+    <ul class="sm:flex w-full sm:w-auto hidden mt-2 sm:mt-0 sm:space-x-2">
+      {{ with .Site.GetPage "/about" }}
+      <li>
+        <a
+          href="{{ .Permalink }}"
+          class="hover:text-sky-500 dark:hover:text-sky-500"
+          >{{ .Title }}</a
+        >
+      </li>
+      {{ end }}
+      <!-- this gets the page with the path /about  -->
+
+      <!-- this loops through all sections within the content directory and renders a list item, a tag, with a .Permalink variable that points to the section /content/[section_name] -->
+      <!-- a section is the nested directory within the content directory  -->
+      {{ range .Site.Sections }}
+      <li>
+        <a
+        href="{{ .Permalink }}"
+        class="hover:text-sky-500 dark:hover:text-sky-500"
+        >{{ .Title }}</a
+        >
+      </li>
+      {{ end }}
+      <!-- this loops through all sections within the content directory and renders a list item, a tag, with a .Permalink variable that points to the section /content/[section_name] -->
+    </ul>
+  </nav>
+</header>

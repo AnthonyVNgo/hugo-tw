@@ -1,0 +1,53 @@
+{{ define "main" }}
+<article class="flex justify-center">
+  <!-- <h1 class="font-serif font-extralight text-5xl">{{ .Title }}</h1> -->
+  <!-- {{ .Content }} -->
+  <div>
+    <h1 class="font-bold text-red-800">This is the home page</h1>
+    <ul>
+      <li>the home page is a special page</li>
+      <li>it is a list page</li>
+      <li>it is located in layouts/index.html</li>
+      <li>
+        the contents of layouts/index.html are injected into the
+        layouts/_default/baseof.html
+      </li>
+    </ul>
+
+    <h2 class="text-red-300">Hugo variabbles</h2>
+    <!-- <ul class="">
+      <li>.Site.Title = {{.Site.Title}}</li>
+      <li>.Site.Sections = {{.Site.Sections}}</li>
+      <li>.Site.Pages = {{.Site.Pages}}</li>
+      <li>.Site.AllPages = {{.Site.AllPages}}</li>
+    </ul> -->
+
+    <ul>
+        {{ range $taxonomy, $terms := site.Taxonomies }}
+          <li>
+            {{ with site.GetPage $taxonomy }}
+              <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+            <ul>
+              {{ range $term, $weightedPages := $terms }}
+              <li>
+                {{ with site.GetPage (path.Join $taxonomy $term) }}
+                  <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+                {{ end }}
+              </li>
+                <ul>
+                  {{ range $weightedPages }}
+                    <li>
+                      <a href="{{ .RelPermalink }}"> {{ .LinkTitle }}</a>
+                    </li>
+                  {{ end }}
+                </ul>
+              {{ end }}
+            </ul>
+          </li>
+        {{ end }}
+      </ul>
+  </div>
+  <h2 class="text-red-400">testing</h2>
+</article>
+{{ end }}
