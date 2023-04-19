@@ -21,33 +21,6 @@
       <li>.Site.Pages = {{.Site.Pages}}</li>
       <li>.Site.AllPages = {{.Site.AllPages}}</li>
     </ul> -->
-
-    <ul>
-        {{ range $taxonomy, $terms := site.Taxonomies }}
-          <li>
-            {{ with site.GetPage $taxonomy }}
-              <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-            {{ end }}
-            <ul>
-              {{ range $term, $weightedPages := $terms }}
-              <li>
-                {{ with site.GetPage (path.Join $taxonomy $term) }}
-                  <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-                {{ end }}
-              </li>
-                <ul>
-                  {{ range $weightedPages }}
-                    <li>
-                      <a href="{{ .RelPermalink }}"> {{ .LinkTitle }}</a>
-                    </li>
-                  {{ end }}
-                </ul>
-              {{ end }}
-            </ul>
-          </li>
-        {{ end }}
-      </ul>
   </div>
-  <h2 class="text-red-400">testing</h2>
 </article>
 {{ end }}
