@@ -1,7 +1,10 @@
 {{ define "main" }} 
-
+<div class="flex justify-center">
+  <h2>Tags</h2>
+</div>
 <!-- this renders all the tags params included in all content/posts' front matter  -->
   <div class="flex justify-center space-x-5">
+    
     {{range $name, $taxonomy := .Site.Taxonomies.tags}} {{ $cnt:= .Count }} 
       {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
       <div>
@@ -11,12 +14,7 @@
       {{end}} 
     {{end}}
   </div>
-  <h1>Tags</h1>
 <ul>
-{{ range .Site.Taxonomies.tags }}
-  <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
-{{ end }}
-</ul>
 
 <!-- range .Pages seems to be looping through the pages for the corresponding section, ie content/posts & the three post .md files -->
   {{ range .Paginator.Pages }}
